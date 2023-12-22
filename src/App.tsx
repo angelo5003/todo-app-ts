@@ -1,11 +1,11 @@
 import "./App.css";
-import Form from "./components/Form/Form";
-import TodoList from "./components/TodoList/TodoList";
+import Form from "./Components/Form/Form";
+// import TodoList from "./Components/TodoList/TodoList";
 function App() {
   return (
     <>
       <section>
-        <TodoList />
+        {/* <TodoList /> */}
         <Form />
       </section>
     </>
