@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   handleChange,
   handleSubmit,
 } from "../../Functions/FormFunctions/FormFunctions";
 import { v4 as uuidv4 } from "uuid";
 
-const Form = () => {
+// 👇 prop type definition that is coming from the app component
+type FormProps = {
+  todoArray: newTodos[];
+  setTodoArray: Dispatch<SetStateAction<newTodos[]>>;
+};
+
+// 👇 Define the type for new todos
+type newTodos = {
+  id: string;
+  todo: string;
+};
+
+const Form: React.FC<FormProps> = ({ todoArray, setTodoArray }) => {
   // 👇️ value of input is a string
   const [todoInput, setTodoInput] = useState("");
-  // 👇️ state that to hold the array of todos objects
-  //  <newTodos[]> is a type assertion in TypeScript. It's saying that the todoArray will be an array where each element follows the structure defined by the newTodos type.
-  const [todoArray, setTodoArray] = useState<newTodos[]>([]);
-  console.log(`todoArray:`, todoArray);
-
-  // 👇 Define the type for new todos
-  type newTodos = {
-    id: string;
-    todo: string;
-  };
 
   // 👇 Function to add a new todo
   const handleAddTodo = () => {
