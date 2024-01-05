@@ -7,14 +7,14 @@ import { v4 as uuidv4 } from "uuid";
 
 // 👇 prop type definition that is coming from the app component
 type FormProps = {
-  todoArray: newTodos[];
-  setTodoArray: Dispatch<SetStateAction<newTodos[]>>;
+  todoArray: newTodos[]; // 👈 The current list of todos
+  setTodoArray: Dispatch<SetStateAction<newTodos[]>>; // 👈 A function to update the list of todos
 };
 
 // 👇 Define the type for new todos
 type newTodos = {
-  id: string;
-  todo: string;
+  id: string; // 👈 The unique identifier for a todo
+  todo: string; // 👈 The text of the todo
 };
 
 const Form: React.FC<FormProps> = ({ todoArray, setTodoArray }) => {
@@ -25,12 +25,12 @@ const Form: React.FC<FormProps> = ({ todoArray, setTodoArray }) => {
   const handleAddTodo = () => {
     // 👇 Create a new todo object
     const newTodo: newTodos = {
-      id: uuidv4(),
-      todo: todoInput,
+      id: uuidv4(), // 👈 Generate a unique ID for the new todo
+      todo: todoInput, // 👈 Use the current input value as the todo text
     };
     // 👇 Add the new todo object to the todoArray
-    setTodoArray([...todoArray, newTodo]);
-    setTodoInput("");
+    setTodoArray([...todoArray, newTodo]); // 👈 Call setTodoArray with a new array that includes all the old todos and the new todo
+    setTodoInput(""); // 👈 Clear the input
   };
 
   // Event handler for form submission
