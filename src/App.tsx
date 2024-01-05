@@ -16,12 +16,27 @@ function App() {
     id: string;
     todo: string;
   };
+
+  const handleRemoveItem = (id: string) => {
+    console.log(`deletdId:`, id);
+    setTodoArray((selectedItem) =>
+      selectedItem.filter((todo) => {
+        return todo.id !== id;
+      })
+    );
+  };
   return (
     <>
       <section>
         {Array.isArray(todoArray) ? (
-          // 👇 For each todo object in todoArray, pass the todo string as a prop to the TodoList component.
-          todoArray.map((todo) => <TodoList key={todo.id} todo={todo.todo} />)
+          // 👇 For each todo object in todoArray, pass the entire todo object(called: todoObject) as a prop to the TodoList component.
+          todoArray.map((todo) => (
+            <TodoList
+              key={todo.id}
+              todoObject={todo}
+              handleRemoveItem={handleRemoveItem}
+            />
+          ))
         ) : (
           <div>Oops there is no data</div>
         )}
