@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Form from "./Components/Form/Form";
 import TodoList from "./Components/TodoList/TodoList";
@@ -7,7 +7,15 @@ function App() {
   // 👇 The <newTodos[]> is a type assertion in TypeScript, saying that todoArray will be an array of newTodos objects.
 
   // 👇️ state that hold the array of todos objects
-  const [todoArray, setTodoArray] = useState<newTodo[]>([]);
+  // Load todoArray from localStorage or start with an empty array
+  const [todoArray, setTodoArray] = useState<newTodo[]>(() =>
+    JSON.parse(localStorage.getItem("todoArray") || "[]")
+  );
+
+  // 👇 Save todoArray to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("todoArray", JSON.stringify(todoArray));
+  }, [todoArray]); // 👈 The [todoArray] dependency ensures useEffect runs when todoArray changes
 
   console.log(`todoArray:`, todoArray);
 
